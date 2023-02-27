@@ -1,0 +1,27 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Gravatar
+    network: goerli
+    source:
+      address: "0xaFdBbb36a1b4B5fA018069f0894d418dA3f248F5"
+      abi: Gravatar
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NewGravatar
+        - UpdatedGravatar
+      abis:
+        - name: Gravatar
+          file: Gravatar\abis\Gravatar.json
+      eventHandlers:
+        - event: NewGravatar(uint256,address,string,string)
+          handler: handleNewGravatar
+        - event: UpdatedGravatar(uint256,address,string,string)
+          handler: handleUpdatedGravatar
+      file: Gravatar\Gravatar.wasm
